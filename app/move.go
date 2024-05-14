@@ -34,7 +34,11 @@ func Move(cmd *cobra.Command, args []string) {
 	keys, _ := srcRdb.Keys(context.Background(), keyPattern).Result()
 
 	for _, key := range keys {
-		scores, _ := srcRdb.ZRangeWithScores(context.Background(), key, 0, -1).Result()
+		scores, err := srcRdb.ZRangeWithScores(context.Background(), key, 0, -1).Result()
+		if err != nil {
+			log.Printf("zrange 0 -1 failed with error %v", err)
+			continue
+		}
 		for _, score := range scores {
 			val := score.Score
 			mem := score.Member.(string)

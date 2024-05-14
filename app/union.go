@@ -8,7 +8,7 @@ import (
 	"log"
 )
 
-func Copy(cmd *cobra.Command, args []string) {
+func Union(cmd *cobra.Command, args []string) {
 	srcHost, _ := cmd.Flags().GetString("src-host")
 	srcPort, _ := cmd.Flags().GetInt("src-port")
 	srcPassword, _ := cmd.Flags().GetString("src-password")
